@@ -18,7 +18,7 @@ export const Reply = {
     },
 };
 
-export const ReplayEdit = {
+export const EditReply = {
     error(message: string): WebhookEditMessageOptions {
         return {
             embeds: [

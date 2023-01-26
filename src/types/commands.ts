@@ -8,7 +8,7 @@ export interface CommandProps {
     log: LoggerFunction;
 }
 
-export type CommandExec = (props: CommandProps, ...args: unknown[]) => Awaitable<void>;
+export type CommandExec = (props: CommandProps) => Awaitable<unknown>;
 
 export type CommandMeta = SlashCommandBuilder | Omit<SlashCommandBuilder, "addSubcommand" | "addSubcommandGroup">;
 
