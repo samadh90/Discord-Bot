@@ -16,6 +16,8 @@ const meta = new SlashCommandBuilder()
 export default command(meta, ({ interaction }) => {
     const message = interaction.options.getString("message");
 
+    console.log(message);
+
     return interaction.reply({
         ephemeral: true,
         content: message ?? "Pong! 🏓",
