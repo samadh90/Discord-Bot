@@ -4,6 +4,7 @@ import { createId, EditReply, event, readId, Reply } from "../../utils";
 
 export default event("interactionCreate", async ({ log }, interaction) => {
     if (!interaction.isButton() && !interaction.isStringSelectMenu()) return;
+    
     const [namespace] = readId(interaction.customId);
 
     // If namespace not in help pages stop
@@ -17,7 +18,11 @@ export default event("interactionCreate", async ({ log }, interaction) => {
             case Namespaces.root:
                 return await interaction.editReply(getCategoryRoot());
             case Namespaces.select:
-                const newId = createId(Namespaces.select, (interaction as StringSelectMenuInteraction).values[0]);
+                // Get the ID of the selected option
+                const value = (interaction as StringSelectMenuInteraction).values[0];
+                // Create a new ID from the option ID
+                const newId = createId(Namespaces.select, value);
+                // Get the category page for the new ID
                 return await interaction.editReply(getCategoryPage(newId));
             case Namespaces.action:
                 return await interaction.editReply(getCategoryPage(interaction.customId));
