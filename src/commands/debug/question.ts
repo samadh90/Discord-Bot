@@ -32,9 +32,6 @@ export default command(meta, async ({ interaction }) => {
             max_tokens: 2000,
         });
 
-        // get the response message from the API
-        console.log(response.data.choices[0].text);
-
         return interaction.reply({
             ephemeral: true,
             content: response.data.choices[0].text,
