@@ -1,14 +1,13 @@
 import {
     EmbedBuilder,
     InteractionReplyOptions,
-    SelectMenuOptionBuilder,
-    SelectMenuBuilder,
+    StringSelectMenuOptionBuilder,
+    StringSelectMenuBuilder,
     ActionRowBuilder,
     APIEmbedField,
     ButtonBuilder,
     ButtonStyle,
 } from "discord.js";
-import { cp } from "fs";
 import CategoryRoot from "../commands";
 import { chunk, createId, readId } from "../utils";
 
@@ -32,10 +31,10 @@ export function getCategoryRoot(ephemeral?: boolean): InteractionReplyOptions {
     // Map the categories
     const mappedCategories = CategoryRoot.map(
         ({ name, description, emoji }) =>
-            new SelectMenuOptionBuilder({
+            new StringSelectMenuOptionBuilder({
                 label: name,
                 description,
-                emoji,
+                emoji: emoji ? { name: emoji } : undefined,
                 value: name,
             })
     );
@@ -44,13 +43,15 @@ export function getCategoryRoot(ephemeral?: boolean): InteractionReplyOptions {
 
     const selectId = createId(N.select);
 
-    const select = new SelectMenuBuilder()
+    console.log(selectId);
+
+    const select = new StringSelectMenuBuilder()
         .setCustomId(selectId)
         .setPlaceholder("Select a category")
         .setMaxValues(1)
         .addOptions(mappedCategories);
 
-    const component = new ActionRowBuilder<SelectMenuBuilder>().addComponents(select);
+    const component = new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(select);
 
     return {
         embeds: [embed],
