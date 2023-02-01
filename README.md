@@ -1,5 +1,7 @@
 # Discord-Bot
 
+Empty commit
+
 ## Discord-Bot structure
 
 ```
