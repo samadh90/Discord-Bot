@@ -1,6 +1,6 @@
 # Discord-Bot
 
-Empty commit
+Simple discord bot demo with basic command and integrated openai api
 
 ## Discord-Bot structure
 
